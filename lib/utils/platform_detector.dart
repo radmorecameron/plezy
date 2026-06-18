@@ -238,14 +238,14 @@ class PlatformDetector {
     return isDesktop(context) || isTV();
   }
 
-  /// Detects if running on a mobile platform (iOS or Android).
+  /// Detects if running on a mobile platform (iOS, Android or Linux Mobile).
   /// Excludes TV platforms (Android TV / Apple TV) even though the underlying
   /// OS is iOS or Android.
   /// Uses Theme for consistent platform detection across the app.
   static bool isMobile(BuildContext context) {
     if (isTV()) return false;
     final platform = Theme.of(context).platform;
-    return platform == TargetPlatform.iOS || platform == TargetPlatform.android;
+    return platform == TargetPlatform.iOS || platform == TargetPlatform.android || isLinuxMobile(context);
   }
 
   static bool isHandheld(BuildContext context) {
@@ -342,5 +342,14 @@ class PlatformDetector {
 
   static bool isPhone(BuildContext context) {
     return isHandheld(context) && !isTablet(context);
+  }
+
+  static bool isLinuxMobile(BuildContext context) {
+    if (!Platform.isLinux) {
+      return false;
+    }
+    final size = MediaQuery.sizeOf(context);
+    final isPortrait = MediaQuery.orientationOf(context) == Orientation.portrait;
+    return isPortrait ? size.width <= 600 : size.height <= 600;
   }
 }
