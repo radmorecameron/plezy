@@ -181,7 +181,7 @@ class PlatformDetector {
     if (isTV()) return false;
     final platform = Theme.of(context).platform;
     return platform == TargetPlatform.iOS || platform == TargetPlatform.android ||
-      (platform == TargetPlatform.linux && getDiagonalInches(context) <= 13.0);
+      (platform == TargetPlatform.linux && getDiagonalInches(context) <= 7.0);
   }
 
   static bool isHandheld(BuildContext context) {
