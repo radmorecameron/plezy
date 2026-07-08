@@ -72,6 +72,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsLiveTvKo liveTv = _TranslationsLiveTvKo._(_root);
 	@override late final _TranslationsCollectionsKo collections = _TranslationsCollectionsKo._(_root);
 	@override late final _TranslationsPlaylistsKo playlists = _TranslationsPlaylistsKo._(_root);
+	@override late final _TranslationsMusicKo music = _TranslationsMusicKo._(_root);
 	@override late final _TranslationsWatchTogetherKo watchTogether = _TranslationsWatchTogetherKo._(_root);
 	@override late final _TranslationsDownloadsKo downloads = _TranslationsDownloadsKo._(_root);
 	@override late final _TranslationsShadersKo shaders = _TranslationsShadersKo._(_root);
@@ -394,6 +395,14 @@ class _TranslationsSettingsKo extends TranslationsSettingsEn {
 	@override String get audioPassthrough => '오디오 패스스루';
 	@override String get audioPassthroughDescription => 'Dolby/DTS 오디오를 재인코딩 없이 리시버나 TV로 전송하여 서라운드 사운드를 유지합니다. 소리가 나지 않으면 비활성화하세요.';
 	@override String get audioPassthroughDescriptionAppleTv => 'Dolby Digital Plus(Atmos 포함)를 비트스트림으로 시스템에 전달합니다. DTS와 TrueHD는 계속 멀티채널 PCM으로 재생됩니다. 탐색 시 짧은 소리 끊김이 발생할 수 있습니다.';
+	@override String get audioDownmix => '스테레오로 다운믹스';
+	@override String get audioDownmixDescription => '서라운드 오디오를 스테레오 스피커나 헤드폰용 2채널로 믹스합니다';
+	@override String get downmixCenterBoost => '센터 채널 부스트';
+	@override String downmixCenterBoostValue({required Object db}) => '${db} dB';
+	@override String get downmixCenterBoostLabel => '부스트 (dB)';
+	@override String get downmixCenterBoostShort => 'dB';
+	@override String get audioDownmixNormalize => '다운믹스 시 음량 정규화';
+	@override String get audioDownmixNormalizeDescription => '클리핑을 방지하기 위해 믹스 음량을 낮춥니다. 원래 음량을 유지하려면 끄세요(큰 소리 장면에서 왜곡될 수 있음).';
 	@override String get atmosDiagnostics => 'Atmos 출력 테스트';
 	@override String get atmosDiagnosticsDescription => '시스템 플레이어로 테스트 신호를 재생하여 Dolby Atmos 출력을 진단합니다';
 	@override String get atmosTestHlsAtmos => 'Apple Atmos 스트림';
@@ -890,6 +899,9 @@ class _TranslationsDiscoverKo extends TranslationsDiscoverEn {
 	@override String nextUpIn({required Object library}) => '${library}의 다음 에피소드';
 	@override String get recentlyAdded => '최근에 추가됨';
 	@override String recentlyAddedIn({required Object library}) => '${library}에 최근에 추가됨';
+	@override String latestAlbumsIn({required Object library}) => '${library}의 최신 앨범';
+	@override String recentlyPlayedIn({required Object library}) => '${library}에서 최근 재생';
+	@override String mostPlayedIn({required Object library}) => '${library}에서 가장 많이 재생';
 	@override String playEpisode({required Object season, required Object episode}) => 'S${season}E${episode}';
 	@override String get overview => '개요';
 	@override String get cast => '출연진';
@@ -1191,6 +1203,39 @@ class _TranslationsPlaylistsKo extends TranslationsPlaylistsEn {
 	@override String get errorRemoving => '재생 목록에서 제거 실패';
 }
 
+// Path: music
+class _TranslationsMusicKo extends TranslationsMusicEn {
+	_TranslationsMusicKo._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get goToAlbum => '앨범으로 이동';
+	@override String get goToArtist => '아티스트로 이동';
+	@override String get instantMix => '인스턴트 믹스';
+	@override String get playNext => '다음에 재생';
+	@override String get addToQueue => '대기열에 추가';
+	@override String discNumber({required Object n}) => '디스크 ${n}';
+	@override String trackCount({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('ko'))(n,
+		other: '${n}곡',
+	);
+	@override String get nowPlaying => '재생 중';
+	@override String playingFrom({required Object title}) => '${title}에서 재생 중';
+	@override String get queue => '재생 대기열';
+	@override String get clearQueue => '대기열 비우기';
+	@override String get lyrics => '가사';
+	@override String get noLyrics => '가사 없음';
+	@override String get sleepTimer => '취침 타이머';
+	@override String get sleepTimerEndOfTrack => '곡 종료 시';
+	@override String sleepTimerMinutes({required Object n}) => '${n}분';
+	@override String get stopPlayback => '재생 중지';
+	@override String get previousTrack => '이전 곡';
+	@override String get nextTrack => '다음 곡';
+	@override String get repeat => '반복';
+	@override String get repeatAll => '전체 반복';
+	@override String get repeatOne => '한 곡 반복';
+}
+
 // Path: watchTogether
 class _TranslationsWatchTogetherKo extends TranslationsWatchTogetherEn {
 	_TranslationsWatchTogetherKo._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -1271,6 +1316,8 @@ class _TranslationsDownloadsKo extends TranslationsDownloadsEn {
 	@override String get manage => '관리';
 	@override String get tvShows => 'TV 프로그램';
 	@override String get movies => '영화';
+	@override String get music => '음악';
+	@override String tracksQueued({required Object count}) => '${count}곡 다운로드 대기 중';
 	@override String get noDownloads => '다운로드 없음';
 	@override String get noDownloadsDescription => '다운로드한 콘텐츠는 오프라인 시청을 위해 여기에 표시됩니다';
 	@override String get downloadNow => '다운로드';
@@ -1391,6 +1438,7 @@ class _TranslationsVideoSettingsKo extends TranslationsVideoSettingsEn {
 	@override String get performanceOverlay => '성능 오버레이';
 	@override String get audioPassthrough => '오디오 패스스루';
 	@override String get audioNormalization => '음량 정규화';
+	@override String get audioDownmix => '스테레오로 다운믹스';
 }
 
 // Path: performanceOverlay
@@ -1732,6 +1780,9 @@ class _TranslationsLibrariesGroupingsKo extends TranslationsLibrariesGroupingsEn
 	@override String get shows => 'TV 프로그램';
 	@override String get seasons => '시즌';
 	@override String get episodes => '화';
+	@override String get artists => '아티스트';
+	@override String get albums => '앨범';
+	@override String get tracks => '트랙';
 	@override String get folders => '폴더';
 }
 
@@ -2198,6 +2249,14 @@ extension on TranslationsKo {
 			'settings.audioPassthrough' => '오디오 패스스루',
 			'settings.audioPassthroughDescription' => 'Dolby/DTS 오디오를 재인코딩 없이 리시버나 TV로 전송하여 서라운드 사운드를 유지합니다. 소리가 나지 않으면 비활성화하세요.',
 			'settings.audioPassthroughDescriptionAppleTv' => 'Dolby Digital Plus(Atmos 포함)를 비트스트림으로 시스템에 전달합니다. DTS와 TrueHD는 계속 멀티채널 PCM으로 재생됩니다. 탐색 시 짧은 소리 끊김이 발생할 수 있습니다.',
+			'settings.audioDownmix' => '스테레오로 다운믹스',
+			'settings.audioDownmixDescription' => '서라운드 오디오를 스테레오 스피커나 헤드폰용 2채널로 믹스합니다',
+			'settings.downmixCenterBoost' => '센터 채널 부스트',
+			'settings.downmixCenterBoostValue' => ({required Object db}) => '${db} dB',
+			'settings.downmixCenterBoostLabel' => '부스트 (dB)',
+			'settings.downmixCenterBoostShort' => 'dB',
+			'settings.audioDownmixNormalize' => '다운믹스 시 음량 정규화',
+			'settings.audioDownmixNormalizeDescription' => '클리핑을 방지하기 위해 믹스 음량을 낮춥니다. 원래 음량을 유지하려면 끄세요(큰 소리 장면에서 왜곡될 수 있음).',
 			'settings.atmosDiagnostics' => 'Atmos 출력 테스트',
 			'settings.atmosDiagnosticsDescription' => '시스템 플레이어로 테스트 신호를 재생하여 Dolby Atmos 출력을 진단합니다',
 			'settings.atmosTestHlsAtmos' => 'Apple Atmos 스트림',
@@ -2447,6 +2506,8 @@ extension on TranslationsKo {
 			'messages.logsCleared' => '로그가 삭제 되었습니다',
 			'messages.logsCopied' => '로그가 클립보드에 복사 되었습니다',
 			'messages.noLogsAvailable' => '사용 가능한 로그가 없습니다',
+			_ => null,
+		} ?? switch (path) {
 			'messages.libraryScanning' => ({required Object title}) => '"${title}"을(를) 스캔 중입니다...',
 			'messages.libraryScanStarted' => ({required Object title}) => '"${title}" 미디어 라이브러리 스캔 시작',
 			'messages.libraryScanFailed' => ({required Object error}) => '미디어 라이브러리 스캔 실패: ${error}',
@@ -2455,8 +2516,6 @@ extension on TranslationsKo {
 			'messages.metadataRefreshFailed' => ({required Object error}) => '메타데이터 새로고침 실패: ${error}',
 			'messages.logoutConfirm' => '로그아웃 하시겠습니까?',
 			'messages.noSeasonsFound' => '시즌을 찾을 수 없음',
-			_ => null,
-		} ?? switch (path) {
 			'messages.seasonsLoadFailed' => '시즌을 불러오지 못했습니다',
 			'messages.noEpisodesFound' => '시즌 1에서 에피소드를 찾을 수 없습니다',
 			'messages.noEpisodesFoundGeneral' => '에피소드를 찾을 수 없습니다',
@@ -2582,6 +2641,9 @@ extension on TranslationsKo {
 			'discover.nextUpIn' => ({required Object library}) => '${library}의 다음 에피소드',
 			'discover.recentlyAdded' => '최근에 추가됨',
 			'discover.recentlyAddedIn' => ({required Object library}) => '${library}에 최근에 추가됨',
+			'discover.latestAlbumsIn' => ({required Object library}) => '${library}의 최신 앨범',
+			'discover.recentlyPlayedIn' => ({required Object library}) => '${library}에서 최근 재생',
+			'discover.mostPlayedIn' => ({required Object library}) => '${library}에서 가장 많이 재생',
 			'discover.playEpisode' => ({required Object season, required Object episode}) => 'S${season}E${episode}',
 			'discover.overview' => '개요',
 			'discover.cast' => '출연진',
@@ -2654,6 +2716,9 @@ extension on TranslationsKo {
 			'libraries.groupings.shows' => 'TV 프로그램',
 			'libraries.groupings.seasons' => '시즌',
 			'libraries.groupings.episodes' => '화',
+			'libraries.groupings.artists' => '아티스트',
+			'libraries.groupings.albums' => '앨범',
+			'libraries.groupings.tracks' => '트랙',
 			'libraries.groupings.folders' => '폴더',
 			'libraries.filterCategories.genre' => '장르',
 			'libraries.filterCategories.year' => '연도',
@@ -2815,6 +2880,28 @@ extension on TranslationsKo {
 			'playlists.errorAdding' => '재생 목록에 추가 실패',
 			'playlists.errorReordering' => '재생 목록 항목 재정렬 실패',
 			'playlists.errorRemoving' => '재생 목록에서 제거 실패',
+			'music.goToAlbum' => '앨범으로 이동',
+			'music.goToArtist' => '아티스트로 이동',
+			'music.instantMix' => '인스턴트 믹스',
+			'music.playNext' => '다음에 재생',
+			'music.addToQueue' => '대기열에 추가',
+			'music.discNumber' => ({required Object n}) => '디스크 ${n}',
+			'music.trackCount' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('ko'))(n, other: '${n}곡', ), 
+			'music.nowPlaying' => '재생 중',
+			'music.playingFrom' => ({required Object title}) => '${title}에서 재생 중',
+			'music.queue' => '재생 대기열',
+			'music.clearQueue' => '대기열 비우기',
+			'music.lyrics' => '가사',
+			'music.noLyrics' => '가사 없음',
+			'music.sleepTimer' => '취침 타이머',
+			'music.sleepTimerEndOfTrack' => '곡 종료 시',
+			'music.sleepTimerMinutes' => ({required Object n}) => '${n}분',
+			'music.stopPlayback' => '재생 중지',
+			'music.previousTrack' => '이전 곡',
+			'music.nextTrack' => '다음 곡',
+			'music.repeat' => '반복',
+			'music.repeatAll' => '전체 반복',
+			'music.repeatOne' => '한 곡 반복',
 			'watchTogether.title' => '함께 보기',
 			'watchTogether.description' => '친구 및 가족과 콘텐츠를 동시에 시청하세요',
 			'watchTogether.createSession' => '세션 생성',
@@ -2879,6 +2966,8 @@ extension on TranslationsKo {
 			'downloads.manage' => '관리',
 			'downloads.tvShows' => 'TV 프로그램',
 			'downloads.movies' => '영화',
+			'downloads.music' => '음악',
+			'downloads.tracksQueued' => ({required Object count}) => '${count}곡 다운로드 대기 중',
 			'downloads.noDownloads' => '다운로드 없음',
 			'downloads.noDownloadsDescription' => '다운로드한 콘텐츠는 오프라인 시청을 위해 여기에 표시됩니다',
 			'downloads.downloadNow' => '다운로드',
@@ -2931,6 +3020,8 @@ extension on TranslationsKo {
 			'downloads.manageSyncRule' => '동기화 관리',
 			'downloads.editEpisodeCount' => '에피소드 수',
 			'downloads.editSyncFilter' => '동기화 필터',
+			_ => null,
+		} ?? switch (path) {
 			'downloads.syncAllItems' => '모든 항목 동기화 중',
 			'downloads.syncUnwatchedItems' => '시청하지 않은 항목 동기화 중',
 			'downloads.syncRuleServerContext' => ({required Object server, required Object status}) => '서버: ${server} • ${status}',
@@ -2969,8 +3060,6 @@ extension on TranslationsKo {
 			'companionRemote.session.usePhoneToControl' => '모바일 기기로 이 앱을 제어하세요',
 			'companionRemote.session.startServer' => '서버 시작',
 			'companionRemote.session.stopServer' => '서버 중지',
-			_ => null,
-		} ?? switch (path) {
 			'companionRemote.session.minimize' => '최소화',
 			'companionRemote.pairing.discoveryDescription' => '같은 Plex 계정의 Plezy 기기가 여기에 표시됩니다',
 			'companionRemote.pairing.hostAddressHint' => '192.168.1.100:48632',
@@ -3030,6 +3119,7 @@ extension on TranslationsKo {
 			'videoSettings.performanceOverlay' => '성능 오버레이',
 			'videoSettings.audioPassthrough' => '오디오 패스스루',
 			'videoSettings.audioNormalization' => '음량 정규화',
+			'videoSettings.audioDownmix' => '스테레오로 다운믹스',
 			'performanceOverlay.color' => '색상',
 			'performanceOverlay.performance' => '성능',
 			'performanceOverlay.buffer' => '버퍼',

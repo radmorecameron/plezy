@@ -5,7 +5,6 @@ import '../mixins/disposable_change_notifier_mixin.dart';
 import '../services/data_aggregation_service.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
-import '../utils/content_utils.dart';
 import 'multi_server_provider.dart';
 
 /// Load state for the libraries provider
@@ -15,13 +14,8 @@ enum LibrariesLoadState { initial, loading, loaded, error }
 /// Both SideNavigationRail and LibrariesScreen consume this provider
 /// instead of independently fetching library data.
 class LibrariesProvider extends ChangeNotifier with DisposableChangeNotifierMixin {
-  LibrariesProvider({
-    StorageService? storageService,
-    MultiServerProvider? multiServer,
-    bool Function()? isProfileBinding,
-  }) : _storageService = storageService,
-       _multiServer = multiServer,
-       _isProfileBinding = isProfileBinding ?? _neverBinding {
+  LibrariesProvider({this._storageService, this._multiServer, bool Function()? isProfileBinding})
+    : _isProfileBinding = isProfileBinding ?? _neverBinding {
     // Reload libraries when a new server comes online. Servers bind in waves
     // on sign-in / profile switch and slow ones reconnect after the initial
     // load; without this they stay missing from the sidebar until a re-switch
@@ -68,7 +62,7 @@ class LibrariesProvider extends ChangeNotifier with DisposableChangeNotifierMixi
   /// without refetching the already-loaded servers.
   final Set<String> _pendingDeltaServerIds = {};
 
-  /// Unmodifiable list of all libraries (filtered for supported types, ordered)
+  /// Unmodifiable list of all libraries (ordered)
   List<MediaLibrary> get libraries => List.unmodifiable(_libraries);
 
   /// Whether libraries are currently being loaded
@@ -119,7 +113,7 @@ class LibrariesProvider extends ChangeNotifier with DisposableChangeNotifierMixi
 
   /// Load libraries from all connected servers, unconditionally. Used by
   /// pull-to-refresh, inline connection-add, and library reordering.
-  /// Filters out music libraries and applies saved ordering.
+  /// Applies saved ordering.
   Future<void> loadLibraries() => _load();
 
   /// Single entry point for every full (re)load. Concurrent callers coalesce
@@ -161,7 +155,7 @@ class LibrariesProvider extends ChangeNotifier with DisposableChangeNotifierMixi
 
     try {
       final result = await _aggregationService!.getMediaLibrariesFromAllServers(serverIds: ids);
-      final fresh = result.libraries.where((lib) => !ContentTypeHelper.isMusicLibrary(lib)).toList();
+      final fresh = result.libraries;
 
       final merged = [
         for (final lib in _libraries)
@@ -229,13 +223,10 @@ class LibrariesProvider extends ChangeNotifier with DisposableChangeNotifierMixi
         }
       }
 
-      // Filter out music libraries (not supported)
-      final filteredLibraries = result.libraries.where((lib) => !ContentTypeHelper.isMusicLibrary(lib)).toList();
-
       // Apply saved library order
       final storage = _storageService ??= await StorageService.getInstance();
       final savedOrder = storage.getLibraryOrder();
-      final orderedLibraries = _applyLibraryOrder(filteredLibraries, savedOrder);
+      final orderedLibraries = _applyLibraryOrder(result.libraries, savedOrder);
 
       _libraries = orderedLibraries;
       // Track which servers actually responded so [syncToOnlineServers] can tell

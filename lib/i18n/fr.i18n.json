@@ -265,6 +265,14 @@
     "audioPassthrough": "Audio Pass-Through",
     "audioPassthroughDescription": "Envoyez l'audio Dolby/DTS vers votre ampli ou téléviseur sans réencodage, en conservant le son surround. Désactivez si vous n'avez aucun son.",
     "audioPassthroughDescriptionAppleTv": "Transmet le Dolby Digital Plus (y compris Atmos) au système en bitstream. Le DTS et le TrueHD restent lus en PCM multicanal. De brèves coupures audio peuvent survenir lors des sauts.",
+    "audioDownmix": "Downmix en stéréo",
+    "audioDownmixDescription": "Réduit le son surround à deux canaux pour les enceintes stéréo ou le casque",
+    "downmixCenterBoost": "Renforcement du canal central",
+    "downmixCenterBoostValue": "${db} dB",
+    "downmixCenterBoostLabel": "Renforcement (dB)",
+    "downmixCenterBoostShort": "dB",
+    "audioDownmixNormalize": "Normaliser le volume lors du downmix",
+    "audioDownmixNormalizeDescription": "Atténue le mixage pour éviter la saturation. Désactivez pour conserver le volume d'origine (risque de distorsion sur les scènes fortes).",
     "atmosDiagnostics": "Test de sortie Atmos",
     "atmosDiagnosticsDescription": "Diagnostiquer la sortie Dolby Atmos en lisant des signaux de test via le lecteur système",
     "atmosTestHlsAtmos": "Flux Atmos d'Apple",
@@ -683,6 +691,9 @@
     "nextUpIn": "À suivre dans ${library}",
     "recentlyAdded": "Récemment ajouté",
     "recentlyAddedIn": "Récemment ajouté dans ${library}",
+    "latestAlbumsIn": "Derniers albums dans ${library}",
+    "recentlyPlayedIn": "Récemment lus dans ${library}",
+    "mostPlayedIn": "Les plus lus dans ${library}",
     "playEpisode": "S${season}E${episode}",
     "overview": "Aperçu",
     "cast": "Cast",
@@ -762,6 +773,9 @@
       "shows": "Show TV",
       "seasons": "Saisons",
       "episodes": "Épisodes",
+      "artists": "Artistes",
+      "albums": "Albums",
+      "tracks": "Titres",
       "folders": "Dossiers"
     },
     "filterCategories": {
@@ -947,6 +961,33 @@
     "errorReordering": "Échec de réordonnacement d'élément de playlist",
     "errorRemoving": "Échec de suppression depuis la playlist"
   },
+  "music": {
+    "goToAlbum": "Aller à l'album",
+    "goToArtist": "Aller à l'artiste",
+    "instantMix": "Mix instantané",
+    "playNext": "Lire ensuite",
+    "addToQueue": "Ajouter à la file d'attente",
+    "discNumber": "Disque ${n}",
+    "trackCount": {
+      "one": "${n} titre",
+      "other": "${n} titres"
+    },
+    "nowPlaying": "Lecture en cours",
+    "playingFrom": "Lecture depuis ${title}",
+    "queue": "File d'attente",
+    "clearQueue": "Vider la file d'attente",
+    "lyrics": "Paroles",
+    "noLyrics": "Aucune parole disponible",
+    "sleepTimer": "Minuterie de veille",
+    "sleepTimerEndOfTrack": "Fin du titre",
+    "sleepTimerMinutes": "${n} minutes",
+    "stopPlayback": "Arrêter la lecture",
+    "previousTrack": "Titre précédent",
+    "nextTrack": "Titre suivant",
+    "repeat": "Répéter",
+    "repeatAll": "Tout répéter",
+    "repeatOne": "Répéter le titre"
+  },
   "watchTogether": {
     "title": "Regarder ensemble",
     "description": "Regardez du contenu en synchronisation avec vos amis et votre famille",
@@ -1014,6 +1055,8 @@
     "manage": "Gérer",
     "tvShows": "Show TV",
     "movies": "Films",
+    "music": "Musique",
+    "tracksQueued": "${count} titres en file d'attente de téléchargement",
     "noDownloads": "Aucun téléchargement pour le moment",
     "noDownloadsDescription": "Le contenu téléchargé apparaîtra ici pour être consulté hors ligne.",
     "downloadNow": "Télécharger",
@@ -1176,7 +1219,8 @@
     "audioOutput": "Sortie audio",
     "performanceOverlay": "Superposition de performance",
     "audioPassthrough": "Audio Pass-Through",
-    "audioNormalization": "Normaliser le volume"
+    "audioNormalization": "Normaliser le volume",
+    "audioDownmix": "Downmix en stéréo"
   },
   "performanceOverlay": {
     "color": "Couleur",

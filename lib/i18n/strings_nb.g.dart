@@ -72,6 +72,7 @@ class TranslationsNb extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsLiveTvNb liveTv = _TranslationsLiveTvNb._(_root);
 	@override late final _TranslationsCollectionsNb collections = _TranslationsCollectionsNb._(_root);
 	@override late final _TranslationsPlaylistsNb playlists = _TranslationsPlaylistsNb._(_root);
+	@override late final _TranslationsMusicNb music = _TranslationsMusicNb._(_root);
 	@override late final _TranslationsWatchTogetherNb watchTogether = _TranslationsWatchTogetherNb._(_root);
 	@override late final _TranslationsDownloadsNb downloads = _TranslationsDownloadsNb._(_root);
 	@override late final _TranslationsShadersNb shaders = _TranslationsShadersNb._(_root);
@@ -394,6 +395,14 @@ class _TranslationsSettingsNb extends TranslationsSettingsEn {
 	@override String get audioPassthrough => 'Lydgjennomgang';
 	@override String get audioPassthroughDescription => 'Send Dolby/DTS-lyd til mottakeren eller TV-en uten omkoding, slik at surroundlyd bevares. Slå av hvis du ikke har lyd.';
 	@override String get audioPassthroughDescriptionAppleTv => 'Overlater Dolby Digital Plus (inkl. Atmos) til systemet som bitstream. DTS og TrueHD spilles fortsatt av som flerkanals PCM. Korte lydbrudd kan forekomme ved søking.';
+	@override String get audioDownmix => 'Nedmiks til stereo';
+	@override String get audioDownmixDescription => 'Mikser surroundlyd ned til to kanaler for stereohøyttalere eller hodetelefoner';
+	@override String get downmixCenterBoost => 'Forsterkning av senterkanal';
+	@override String downmixCenterBoostValue({required Object db}) => '${db} dB';
+	@override String get downmixCenterBoostLabel => 'Forsterkning (dB)';
+	@override String get downmixCenterBoostShort => 'dB';
+	@override String get audioDownmixNormalize => 'Normaliser lydstyrke ved nedmiks';
+	@override String get audioDownmixNormalizeDescription => 'Senker miksen for å unngå klipping. Slå av for å beholde originalvolumet (høye scener kan forvrenges).';
 	@override String get atmosDiagnostics => 'Atmos-utgangstest';
 	@override String get atmosDiagnosticsDescription => 'Diagnostiser Dolby Atmos-utgangen ved å spille testsignaler gjennom systemspilleren';
 	@override String get atmosTestHlsAtmos => 'Apple Atmos-strøm';
@@ -890,6 +899,9 @@ class _TranslationsDiscoverNb extends TranslationsDiscoverEn {
 	@override String nextUpIn({required Object library}) => 'Neste opp i ${library}';
 	@override String get recentlyAdded => 'Nylig lagt til';
 	@override String recentlyAddedIn({required Object library}) => 'Nylig lagt til i ${library}';
+	@override String latestAlbumsIn({required Object library}) => 'Nyeste album i ${library}';
+	@override String recentlyPlayedIn({required Object library}) => 'Nylig spilt i ${library}';
+	@override String mostPlayedIn({required Object library}) => 'Mest spilt i ${library}';
 	@override String playEpisode({required Object season, required Object episode}) => 'S${season}E${episode}';
 	@override String get overview => 'Oversikt';
 	@override String get cast => 'Skuespillere';
@@ -1191,6 +1203,40 @@ class _TranslationsPlaylistsNb extends TranslationsPlaylistsEn {
 	@override String get errorRemoving => 'Kunne ikke fjerne fra spilleliste';
 }
 
+// Path: music
+class _TranslationsMusicNb extends TranslationsMusicEn {
+	_TranslationsMusicNb._(TranslationsNb root) : this._root = root, super.internal(root);
+
+	final TranslationsNb _root; // ignore: unused_field
+
+	// Translations
+	@override String get goToAlbum => 'Gå til album';
+	@override String get goToArtist => 'Gå til artist';
+	@override String get instantMix => 'Direktemiks';
+	@override String get playNext => 'Spill neste';
+	@override String get addToQueue => 'Legg til i kø';
+	@override String discNumber({required Object n}) => 'Plate ${n}';
+	@override String trackCount({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('nb'))(n,
+		one: '${n} spor',
+		other: '${n} spor',
+	);
+	@override String get nowPlaying => 'Spilles nå';
+	@override String playingFrom({required Object title}) => 'Spiller fra ${title}';
+	@override String get queue => 'Kø';
+	@override String get clearQueue => 'Tøm kø';
+	@override String get lyrics => 'Sangtekst';
+	@override String get noLyrics => 'Ingen sangtekst tilgjengelig';
+	@override String get sleepTimer => 'Innsovningstimer';
+	@override String get sleepTimerEndOfTrack => 'Slutten av sporet';
+	@override String sleepTimerMinutes({required Object n}) => '${n} minutter';
+	@override String get stopPlayback => 'Stopp avspilling';
+	@override String get previousTrack => 'Forrige spor';
+	@override String get nextTrack => 'Neste spor';
+	@override String get repeat => 'Gjenta';
+	@override String get repeatAll => 'Gjenta alle';
+	@override String get repeatOne => 'Gjenta ett spor';
+}
+
 // Path: watchTogether
 class _TranslationsWatchTogetherNb extends TranslationsWatchTogetherEn {
 	_TranslationsWatchTogetherNb._(TranslationsNb root) : this._root = root, super.internal(root);
@@ -1271,6 +1317,8 @@ class _TranslationsDownloadsNb extends TranslationsDownloadsEn {
 	@override String get manage => 'Administrer';
 	@override String get tvShows => 'TV-serier';
 	@override String get movies => 'Filmer';
+	@override String get music => 'Musikk';
+	@override String tracksQueued({required Object count}) => '${count} spor i nedlastingskø';
 	@override String get noDownloads => 'Ingen nedlastinger ennå';
 	@override String get noDownloadsDescription => 'Nedlastet innhold vil vises her for frakoblet visning';
 	@override String get downloadNow => 'Last ned';
@@ -1391,6 +1439,7 @@ class _TranslationsVideoSettingsNb extends TranslationsVideoSettingsEn {
 	@override String get performanceOverlay => 'Ytelsesoverlegg';
 	@override String get audioPassthrough => 'Lydgjennomgang';
 	@override String get audioNormalization => 'Normaliser lydstyrke';
+	@override String get audioDownmix => 'Nedmiks til stereo';
 }
 
 // Path: performanceOverlay
@@ -1732,6 +1781,9 @@ class _TranslationsLibrariesGroupingsNb extends TranslationsLibrariesGroupingsEn
 	@override String get shows => 'TV-serier';
 	@override String get seasons => 'Sesonger';
 	@override String get episodes => 'Episoder';
+	@override String get artists => 'Artister';
+	@override String get albums => 'Album';
+	@override String get tracks => 'Spor';
 	@override String get folders => 'Mapper';
 }
 
@@ -2198,6 +2250,14 @@ extension on TranslationsNb {
 			'settings.audioPassthrough' => 'Lydgjennomgang',
 			'settings.audioPassthroughDescription' => 'Send Dolby/DTS-lyd til mottakeren eller TV-en uten omkoding, slik at surroundlyd bevares. Slå av hvis du ikke har lyd.',
 			'settings.audioPassthroughDescriptionAppleTv' => 'Overlater Dolby Digital Plus (inkl. Atmos) til systemet som bitstream. DTS og TrueHD spilles fortsatt av som flerkanals PCM. Korte lydbrudd kan forekomme ved søking.',
+			'settings.audioDownmix' => 'Nedmiks til stereo',
+			'settings.audioDownmixDescription' => 'Mikser surroundlyd ned til to kanaler for stereohøyttalere eller hodetelefoner',
+			'settings.downmixCenterBoost' => 'Forsterkning av senterkanal',
+			'settings.downmixCenterBoostValue' => ({required Object db}) => '${db} dB',
+			'settings.downmixCenterBoostLabel' => 'Forsterkning (dB)',
+			'settings.downmixCenterBoostShort' => 'dB',
+			'settings.audioDownmixNormalize' => 'Normaliser lydstyrke ved nedmiks',
+			'settings.audioDownmixNormalizeDescription' => 'Senker miksen for å unngå klipping. Slå av for å beholde originalvolumet (høye scener kan forvrenges).',
 			'settings.atmosDiagnostics' => 'Atmos-utgangstest',
 			'settings.atmosDiagnosticsDescription' => 'Diagnostiser Dolby Atmos-utgangen ved å spille testsignaler gjennom systemspilleren',
 			'settings.atmosTestHlsAtmos' => 'Apple Atmos-strøm',
@@ -2447,6 +2507,8 @@ extension on TranslationsNb {
 			'messages.logsCleared' => 'Logger tømt',
 			'messages.logsCopied' => 'Logger kopiert til utklippstavle',
 			'messages.noLogsAvailable' => 'Ingen logger tilgjengelig',
+			_ => null,
+		} ?? switch (path) {
 			'messages.libraryScanning' => ({required Object title}) => 'Skanner "${title}"...',
 			'messages.libraryScanStarted' => ({required Object title}) => 'Bibliotekkanning startet for "${title}"',
 			'messages.libraryScanFailed' => ({required Object error}) => 'Kunne ikke skanne bibliotek: ${error}',
@@ -2455,8 +2517,6 @@ extension on TranslationsNb {
 			'messages.metadataRefreshFailed' => ({required Object error}) => 'Kunne ikke oppdatere metadata: ${error}',
 			'messages.logoutConfirm' => 'Er du sikker på at du vil logge ut?',
 			'messages.noSeasonsFound' => 'Ingen sesonger funnet',
-			_ => null,
-		} ?? switch (path) {
 			'messages.seasonsLoadFailed' => 'Kunne ikke laste sesonger',
 			'messages.noEpisodesFound' => 'Ingen episoder funnet i første sesong',
 			'messages.noEpisodesFoundGeneral' => 'Ingen episoder funnet',
@@ -2582,6 +2642,9 @@ extension on TranslationsNb {
 			'discover.nextUpIn' => ({required Object library}) => 'Neste opp i ${library}',
 			'discover.recentlyAdded' => 'Nylig lagt til',
 			'discover.recentlyAddedIn' => ({required Object library}) => 'Nylig lagt til i ${library}',
+			'discover.latestAlbumsIn' => ({required Object library}) => 'Nyeste album i ${library}',
+			'discover.recentlyPlayedIn' => ({required Object library}) => 'Nylig spilt i ${library}',
+			'discover.mostPlayedIn' => ({required Object library}) => 'Mest spilt i ${library}',
 			'discover.playEpisode' => ({required Object season, required Object episode}) => 'S${season}E${episode}',
 			'discover.overview' => 'Oversikt',
 			'discover.cast' => 'Skuespillere',
@@ -2654,6 +2717,9 @@ extension on TranslationsNb {
 			'libraries.groupings.shows' => 'TV-serier',
 			'libraries.groupings.seasons' => 'Sesonger',
 			'libraries.groupings.episodes' => 'Episoder',
+			'libraries.groupings.artists' => 'Artister',
+			'libraries.groupings.albums' => 'Album',
+			'libraries.groupings.tracks' => 'Spor',
 			'libraries.groupings.folders' => 'Mapper',
 			'libraries.filterCategories.genre' => 'Sjanger',
 			'libraries.filterCategories.year' => 'År',
@@ -2815,6 +2881,28 @@ extension on TranslationsNb {
 			'playlists.errorAdding' => 'Kunne ikke legge til i spilleliste',
 			'playlists.errorReordering' => 'Kunne ikke omorganisere spillelisteelement',
 			'playlists.errorRemoving' => 'Kunne ikke fjerne fra spilleliste',
+			'music.goToAlbum' => 'Gå til album',
+			'music.goToArtist' => 'Gå til artist',
+			'music.instantMix' => 'Direktemiks',
+			'music.playNext' => 'Spill neste',
+			'music.addToQueue' => 'Legg til i kø',
+			'music.discNumber' => ({required Object n}) => 'Plate ${n}',
+			'music.trackCount' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('nb'))(n, one: '${n} spor', other: '${n} spor', ), 
+			'music.nowPlaying' => 'Spilles nå',
+			'music.playingFrom' => ({required Object title}) => 'Spiller fra ${title}',
+			'music.queue' => 'Kø',
+			'music.clearQueue' => 'Tøm kø',
+			'music.lyrics' => 'Sangtekst',
+			'music.noLyrics' => 'Ingen sangtekst tilgjengelig',
+			'music.sleepTimer' => 'Innsovningstimer',
+			'music.sleepTimerEndOfTrack' => 'Slutten av sporet',
+			'music.sleepTimerMinutes' => ({required Object n}) => '${n} minutter',
+			'music.stopPlayback' => 'Stopp avspilling',
+			'music.previousTrack' => 'Forrige spor',
+			'music.nextTrack' => 'Neste spor',
+			'music.repeat' => 'Gjenta',
+			'music.repeatAll' => 'Gjenta alle',
+			'music.repeatOne' => 'Gjenta ett spor',
 			'watchTogether.title' => 'Se sammen',
 			'watchTogether.description' => 'Se innhold synkronisert med venner og familie',
 			'watchTogether.createSession' => 'Opprett økt',
@@ -2879,6 +2967,8 @@ extension on TranslationsNb {
 			'downloads.manage' => 'Administrer',
 			'downloads.tvShows' => 'TV-serier',
 			'downloads.movies' => 'Filmer',
+			'downloads.music' => 'Musikk',
+			'downloads.tracksQueued' => ({required Object count}) => '${count} spor i nedlastingskø',
 			'downloads.noDownloads' => 'Ingen nedlastinger ennå',
 			'downloads.noDownloadsDescription' => 'Nedlastet innhold vil vises her for frakoblet visning',
 			'downloads.downloadNow' => 'Last ned',
@@ -2931,6 +3021,8 @@ extension on TranslationsNb {
 			'downloads.manageSyncRule' => 'Administrer synkronisering',
 			'downloads.editEpisodeCount' => 'Antall episoder',
 			'downloads.editSyncFilter' => 'Synkroniseringsfilter',
+			_ => null,
+		} ?? switch (path) {
 			'downloads.syncAllItems' => 'Synkroniserer alle elementer',
 			'downloads.syncUnwatchedItems' => 'Synkroniserer usette elementer',
 			'downloads.syncRuleServerContext' => ({required Object server, required Object status}) => 'Server: ${server} • ${status}',
@@ -2969,8 +3061,6 @@ extension on TranslationsNb {
 			'companionRemote.session.usePhoneToControl' => 'Bruk mobilenheten din til å styre denne appen',
 			'companionRemote.session.startServer' => 'Start server',
 			'companionRemote.session.stopServer' => 'Stopp server',
-			_ => null,
-		} ?? switch (path) {
 			'companionRemote.session.minimize' => 'Minimer',
 			'companionRemote.pairing.discoveryDescription' => 'Plezy-enheter med samme Plex-konto vises her',
 			'companionRemote.pairing.hostAddressHint' => '192.168.1.100:48632',
@@ -3030,6 +3120,7 @@ extension on TranslationsNb {
 			'videoSettings.performanceOverlay' => 'Ytelsesoverlegg',
 			'videoSettings.audioPassthrough' => 'Lydgjennomgang',
 			'videoSettings.audioNormalization' => 'Normaliser lydstyrke',
+			'videoSettings.audioDownmix' => 'Nedmiks til stereo',
 			'performanceOverlay.color' => 'Farge',
 			'performanceOverlay.performance' => 'Ytelse',
 			'performanceOverlay.buffer' => 'Buffer',

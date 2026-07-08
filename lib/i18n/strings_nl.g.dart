@@ -72,6 +72,7 @@ class TranslationsNl extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsLiveTvNl liveTv = _TranslationsLiveTvNl._(_root);
 	@override late final _TranslationsCollectionsNl collections = _TranslationsCollectionsNl._(_root);
 	@override late final _TranslationsPlaylistsNl playlists = _TranslationsPlaylistsNl._(_root);
+	@override late final _TranslationsMusicNl music = _TranslationsMusicNl._(_root);
 	@override late final _TranslationsWatchTogetherNl watchTogether = _TranslationsWatchTogetherNl._(_root);
 	@override late final _TranslationsDownloadsNl downloads = _TranslationsDownloadsNl._(_root);
 	@override late final _TranslationsShadersNl shaders = _TranslationsShadersNl._(_root);
@@ -394,6 +395,14 @@ class _TranslationsSettingsNl extends TranslationsSettingsEn {
 	@override String get audioPassthrough => 'Audio-doorvoer';
 	@override String get audioPassthroughDescription => 'Stuur Dolby/DTS-audio zonder hercodering naar je receiver of tv en behoud surroundgeluid. Schakel uit als je geen geluid hebt.';
 	@override String get audioPassthroughDescriptionAppleTv => 'Geeft Dolby Digital Plus (incl. Atmos) als bitstream aan het systeem door. DTS en TrueHD worden nog steeds als meerkanaals PCM afgespeeld. Bij zoeken kunnen korte geluidsonderbrekingen optreden.';
+	@override String get audioDownmix => 'Downmix naar stereo';
+	@override String get audioDownmixDescription => 'Mixt surroundgeluid naar twee kanalen voor stereoluidsprekers of een koptelefoon';
+	@override String get downmixCenterBoost => 'Versterking middenkanaal';
+	@override String downmixCenterBoostValue({required Object db}) => '${db} dB';
+	@override String get downmixCenterBoostLabel => 'Versterking (dB)';
+	@override String get downmixCenterBoostShort => 'dB';
+	@override String get audioDownmixNormalize => 'Volume normaliseren bij downmix';
+	@override String get audioDownmixNormalizeDescription => 'Verlaagt de mix om clipping te voorkomen. Zet uit om het originele volume te behouden (kan vervormen bij luide scènes).';
 	@override String get atmosDiagnostics => 'Atmos-uitvoertest';
 	@override String get atmosDiagnosticsDescription => 'Diagnosticeer de Dolby Atmos-uitvoer door testsignalen via de systeemspeler af te spelen';
 	@override String get atmosTestHlsAtmos => 'Apple Atmos-stream';
@@ -890,6 +899,9 @@ class _TranslationsDiscoverNl extends TranslationsDiscoverEn {
 	@override String nextUpIn({required Object library}) => 'Volgende in ${library}';
 	@override String get recentlyAdded => 'Recent toegevoegd';
 	@override String recentlyAddedIn({required Object library}) => 'Recent toegevoegd in ${library}';
+	@override String latestAlbumsIn({required Object library}) => 'Nieuwste albums in ${library}';
+	@override String recentlyPlayedIn({required Object library}) => 'Onlangs afgespeeld in ${library}';
+	@override String mostPlayedIn({required Object library}) => 'Meest afgespeeld in ${library}';
 	@override String playEpisode({required Object season, required Object episode}) => 'S${season}E${episode}';
 	@override String get overview => 'Overzicht';
 	@override String get cast => 'Acteurs';
@@ -1191,6 +1203,40 @@ class _TranslationsPlaylistsNl extends TranslationsPlaylistsEn {
 	@override String get errorRemoving => 'Fout bij verwijderen uit afspeellijst';
 }
 
+// Path: music
+class _TranslationsMusicNl extends TranslationsMusicEn {
+	_TranslationsMusicNl._(TranslationsNl root) : this._root = root, super.internal(root);
+
+	final TranslationsNl _root; // ignore: unused_field
+
+	// Translations
+	@override String get goToAlbum => 'Ga naar album';
+	@override String get goToArtist => 'Ga naar artiest';
+	@override String get instantMix => 'Instant Mix';
+	@override String get playNext => 'Hierna afspelen';
+	@override String get addToQueue => 'Toevoegen aan wachtrij';
+	@override String discNumber({required Object n}) => 'Schijf ${n}';
+	@override String trackCount({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('nl'))(n,
+		one: '${n} nummer',
+		other: '${n} nummers',
+	);
+	@override String get nowPlaying => 'Nu afspelen';
+	@override String playingFrom({required Object title}) => 'Afspelen vanaf ${title}';
+	@override String get queue => 'Wachtrij';
+	@override String get clearQueue => 'Wachtrij wissen';
+	@override String get lyrics => 'Songtekst';
+	@override String get noLyrics => 'Geen songtekst beschikbaar';
+	@override String get sleepTimer => 'Slaaptimer';
+	@override String get sleepTimerEndOfTrack => 'Einde van nummer';
+	@override String sleepTimerMinutes({required Object n}) => '${n} minuten';
+	@override String get stopPlayback => 'Afspelen stoppen';
+	@override String get previousTrack => 'Vorig nummer';
+	@override String get nextTrack => 'Volgend nummer';
+	@override String get repeat => 'Herhalen';
+	@override String get repeatAll => 'Alles herhalen';
+	@override String get repeatOne => 'Eén herhalen';
+}
+
 // Path: watchTogether
 class _TranslationsWatchTogetherNl extends TranslationsWatchTogetherEn {
 	_TranslationsWatchTogetherNl._(TranslationsNl root) : this._root = root, super.internal(root);
@@ -1271,6 +1317,8 @@ class _TranslationsDownloadsNl extends TranslationsDownloadsEn {
 	@override String get manage => 'Beheren';
 	@override String get tvShows => 'Series';
 	@override String get movies => 'Films';
+	@override String get music => 'Muziek';
+	@override String tracksQueued({required Object count}) => '${count} nummers in wachtrij voor download';
 	@override String get noDownloads => 'Nog geen downloads';
 	@override String get noDownloadsDescription => 'Gedownloade content verschijnt hier voor offline weergave';
 	@override String get downloadNow => 'Download';
@@ -1391,6 +1439,7 @@ class _TranslationsVideoSettingsNl extends TranslationsVideoSettingsEn {
 	@override String get performanceOverlay => 'Prestatie-overlay';
 	@override String get audioPassthrough => 'Audio-doorvoer';
 	@override String get audioNormalization => 'Volume normaliseren';
+	@override String get audioDownmix => 'Downmix naar stereo';
 }
 
 // Path: performanceOverlay
@@ -1732,6 +1781,9 @@ class _TranslationsLibrariesGroupingsNl extends TranslationsLibrariesGroupingsEn
 	@override String get shows => 'Series';
 	@override String get seasons => 'Seizoenen';
 	@override String get episodes => 'Afleveringen';
+	@override String get artists => 'Artiesten';
+	@override String get albums => 'Albums';
+	@override String get tracks => 'Nummers';
 	@override String get folders => 'Mappen';
 }
 
@@ -2198,6 +2250,14 @@ extension on TranslationsNl {
 			'settings.audioPassthrough' => 'Audio-doorvoer',
 			'settings.audioPassthroughDescription' => 'Stuur Dolby/DTS-audio zonder hercodering naar je receiver of tv en behoud surroundgeluid. Schakel uit als je geen geluid hebt.',
 			'settings.audioPassthroughDescriptionAppleTv' => 'Geeft Dolby Digital Plus (incl. Atmos) als bitstream aan het systeem door. DTS en TrueHD worden nog steeds als meerkanaals PCM afgespeeld. Bij zoeken kunnen korte geluidsonderbrekingen optreden.',
+			'settings.audioDownmix' => 'Downmix naar stereo',
+			'settings.audioDownmixDescription' => 'Mixt surroundgeluid naar twee kanalen voor stereoluidsprekers of een koptelefoon',
+			'settings.downmixCenterBoost' => 'Versterking middenkanaal',
+			'settings.downmixCenterBoostValue' => ({required Object db}) => '${db} dB',
+			'settings.downmixCenterBoostLabel' => 'Versterking (dB)',
+			'settings.downmixCenterBoostShort' => 'dB',
+			'settings.audioDownmixNormalize' => 'Volume normaliseren bij downmix',
+			'settings.audioDownmixNormalizeDescription' => 'Verlaagt de mix om clipping te voorkomen. Zet uit om het originele volume te behouden (kan vervormen bij luide scènes).',
 			'settings.atmosDiagnostics' => 'Atmos-uitvoertest',
 			'settings.atmosDiagnosticsDescription' => 'Diagnosticeer de Dolby Atmos-uitvoer door testsignalen via de systeemspeler af te spelen',
 			'settings.atmosTestHlsAtmos' => 'Apple Atmos-stream',
@@ -2447,6 +2507,8 @@ extension on TranslationsNl {
 			'messages.logsCleared' => 'Logs gewist',
 			'messages.logsCopied' => 'Logs gekopieerd naar klembord',
 			'messages.noLogsAvailable' => 'Geen logs beschikbaar',
+			_ => null,
+		} ?? switch (path) {
 			'messages.libraryScanning' => ({required Object title}) => 'Scannen "${title}"...',
 			'messages.libraryScanStarted' => ({required Object title}) => 'Bibliotheek scan gestart voor "${title}"',
 			'messages.libraryScanFailed' => ({required Object error}) => 'Kon bibliotheek niet scannen: ${error}',
@@ -2455,8 +2517,6 @@ extension on TranslationsNl {
 			'messages.metadataRefreshFailed' => ({required Object error}) => 'Kon metadata niet vernieuwen: ${error}',
 			'messages.logoutConfirm' => 'Weet je zeker dat je wilt uitloggen?',
 			'messages.noSeasonsFound' => 'Geen seizoenen gevonden',
-			_ => null,
-		} ?? switch (path) {
 			'messages.seasonsLoadFailed' => 'Kan seizoenen niet laden',
 			'messages.noEpisodesFound' => 'Geen afleveringen gevonden in eerste seizoen',
 			'messages.noEpisodesFoundGeneral' => 'Geen afleveringen gevonden',
@@ -2582,6 +2642,9 @@ extension on TranslationsNl {
 			'discover.nextUpIn' => ({required Object library}) => 'Volgende in ${library}',
 			'discover.recentlyAdded' => 'Recent toegevoegd',
 			'discover.recentlyAddedIn' => ({required Object library}) => 'Recent toegevoegd in ${library}',
+			'discover.latestAlbumsIn' => ({required Object library}) => 'Nieuwste albums in ${library}',
+			'discover.recentlyPlayedIn' => ({required Object library}) => 'Onlangs afgespeeld in ${library}',
+			'discover.mostPlayedIn' => ({required Object library}) => 'Meest afgespeeld in ${library}',
 			'discover.playEpisode' => ({required Object season, required Object episode}) => 'S${season}E${episode}',
 			'discover.overview' => 'Overzicht',
 			'discover.cast' => 'Acteurs',
@@ -2654,6 +2717,9 @@ extension on TranslationsNl {
 			'libraries.groupings.shows' => 'Series',
 			'libraries.groupings.seasons' => 'Seizoenen',
 			'libraries.groupings.episodes' => 'Afleveringen',
+			'libraries.groupings.artists' => 'Artiesten',
+			'libraries.groupings.albums' => 'Albums',
+			'libraries.groupings.tracks' => 'Nummers',
 			'libraries.groupings.folders' => 'Mappen',
 			'libraries.filterCategories.genre' => 'Genre',
 			'libraries.filterCategories.year' => 'Jaar',
@@ -2815,6 +2881,28 @@ extension on TranslationsNl {
 			'playlists.errorAdding' => 'Fout bij toevoegen aan afspeellijst',
 			'playlists.errorReordering' => 'Fout bij herschikken van afspeellijstitem',
 			'playlists.errorRemoving' => 'Fout bij verwijderen uit afspeellijst',
+			'music.goToAlbum' => 'Ga naar album',
+			'music.goToArtist' => 'Ga naar artiest',
+			'music.instantMix' => 'Instant Mix',
+			'music.playNext' => 'Hierna afspelen',
+			'music.addToQueue' => 'Toevoegen aan wachtrij',
+			'music.discNumber' => ({required Object n}) => 'Schijf ${n}',
+			'music.trackCount' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('nl'))(n, one: '${n} nummer', other: '${n} nummers', ), 
+			'music.nowPlaying' => 'Nu afspelen',
+			'music.playingFrom' => ({required Object title}) => 'Afspelen vanaf ${title}',
+			'music.queue' => 'Wachtrij',
+			'music.clearQueue' => 'Wachtrij wissen',
+			'music.lyrics' => 'Songtekst',
+			'music.noLyrics' => 'Geen songtekst beschikbaar',
+			'music.sleepTimer' => 'Slaaptimer',
+			'music.sleepTimerEndOfTrack' => 'Einde van nummer',
+			'music.sleepTimerMinutes' => ({required Object n}) => '${n} minuten',
+			'music.stopPlayback' => 'Afspelen stoppen',
+			'music.previousTrack' => 'Vorig nummer',
+			'music.nextTrack' => 'Volgend nummer',
+			'music.repeat' => 'Herhalen',
+			'music.repeatAll' => 'Alles herhalen',
+			'music.repeatOne' => 'Eén herhalen',
 			'watchTogether.title' => 'Samen Kijken',
 			'watchTogether.description' => 'Kijk synchroon met vrienden en familie',
 			'watchTogether.createSession' => 'Sessie Maken',
@@ -2879,6 +2967,8 @@ extension on TranslationsNl {
 			'downloads.manage' => 'Beheren',
 			'downloads.tvShows' => 'Series',
 			'downloads.movies' => 'Films',
+			'downloads.music' => 'Muziek',
+			'downloads.tracksQueued' => ({required Object count}) => '${count} nummers in wachtrij voor download',
 			'downloads.noDownloads' => 'Nog geen downloads',
 			'downloads.noDownloadsDescription' => 'Gedownloade content verschijnt hier voor offline weergave',
 			'downloads.downloadNow' => 'Download',
@@ -2931,6 +3021,8 @@ extension on TranslationsNl {
 			'downloads.manageSyncRule' => 'Synchronisatie beheren',
 			'downloads.editEpisodeCount' => 'Aantal afleveringen',
 			'downloads.editSyncFilter' => 'Synchronisatiefilter',
+			_ => null,
+		} ?? switch (path) {
 			'downloads.syncAllItems' => 'Alle items synchroniseren',
 			'downloads.syncUnwatchedItems' => 'Ongekeken items synchroniseren',
 			'downloads.syncRuleServerContext' => ({required Object server, required Object status}) => 'Server: ${server} • ${status}',
@@ -2969,8 +3061,6 @@ extension on TranslationsNl {
 			'companionRemote.session.usePhoneToControl' => 'Gebruik je mobiele apparaat om deze app te bedienen',
 			'companionRemote.session.startServer' => 'Server starten',
 			'companionRemote.session.stopServer' => 'Server stoppen',
-			_ => null,
-		} ?? switch (path) {
 			'companionRemote.session.minimize' => 'Minimaliseren',
 			'companionRemote.pairing.discoveryDescription' => 'Plezy-apparaten met hetzelfde Plex-account verschijnen hier',
 			'companionRemote.pairing.hostAddressHint' => '192.168.1.100:48632',
@@ -3030,6 +3120,7 @@ extension on TranslationsNl {
 			'videoSettings.performanceOverlay' => 'Prestatie-overlay',
 			'videoSettings.audioPassthrough' => 'Audio-doorvoer',
 			'videoSettings.audioNormalization' => 'Volume normaliseren',
+			'videoSettings.audioDownmix' => 'Downmix naar stereo',
 			'performanceOverlay.color' => 'Kleur',
 			'performanceOverlay.performance' => 'Prestaties',
 			'performanceOverlay.buffer' => 'Buffer',

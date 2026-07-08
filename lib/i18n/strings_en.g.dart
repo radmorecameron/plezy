@@ -73,6 +73,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final TranslationsLiveTvEn liveTv = TranslationsLiveTvEn.internal(_root);
 	late final TranslationsCollectionsEn collections = TranslationsCollectionsEn.internal(_root);
 	late final TranslationsPlaylistsEn playlists = TranslationsPlaylistsEn.internal(_root);
+	late final TranslationsMusicEn music = TranslationsMusicEn.internal(_root);
 	late final TranslationsWatchTogetherEn watchTogether = TranslationsWatchTogetherEn.internal(_root);
 	late final TranslationsDownloadsEn downloads = TranslationsDownloadsEn.internal(_root);
 	late final TranslationsShadersEn shaders = TranslationsShadersEn.internal(_root);
@@ -876,6 +877,9 @@ class TranslationsSettingsEn {
 	/// en: 'Sync progress to Trakt, MyAnimeList, AniList, and Simkl'
 	String get trackersDescription => 'Sync progress to Trakt, MyAnimeList, AniList, and Simkl';
 
+	/// en: 'Reorder and hide libraries'
+	String get manageLibrariesDescription => 'Reorder and hide libraries';
+
 	/// en: 'Companion Remote Server'
 	String get companionRemoteServer => 'Companion Remote Server';
 
@@ -923,6 +927,30 @@ class TranslationsSettingsEn {
 
 	/// en: 'Hand Dolby Digital Plus (including Atmos) to the system for bitstream output. DTS and TrueHD still play as multichannel PCM. Brief audio gaps can occur when seeking.'
 	String get audioPassthroughDescriptionAppleTv => 'Hand Dolby Digital Plus (including Atmos) to the system for bitstream output. DTS and TrueHD still play as multichannel PCM. Brief audio gaps can occur when seeking.';
+
+	/// en: 'Downmix to Stereo'
+	String get audioDownmix => 'Downmix to Stereo';
+
+	/// en: 'Mix surround audio down to two channels for stereo speakers or headphones'
+	String get audioDownmixDescription => 'Mix surround audio down to two channels for stereo speakers or headphones';
+
+	/// en: 'Center Channel Boost'
+	String get downmixCenterBoost => 'Center Channel Boost';
+
+	/// en: '${db} dB'
+	String downmixCenterBoostValue({required Object db}) => '${db} dB';
+
+	/// en: 'Boost (dB)'
+	String get downmixCenterBoostLabel => 'Boost (dB)';
+
+	/// en: 'dB'
+	String get downmixCenterBoostShort => 'dB';
+
+	/// en: 'Normalize Volume on Downmix'
+	String get audioDownmixNormalize => 'Normalize Volume on Downmix';
+
+	/// en: 'Lower the mix to prevent clipping. Turn off to keep the original volume (may distort loud scenes).'
+	String get audioDownmixNormalizeDescription => 'Lower the mix to prevent clipping. Turn off to keep the original volume (may distort loud scenes).';
 
 	/// en: 'Atmos Output Test'
 	String get atmosDiagnostics => 'Atmos Output Test';
@@ -2128,6 +2156,15 @@ class TranslationsDiscoverEn {
 	/// en: 'Recently Added in ${library}'
 	String recentlyAddedIn({required Object library}) => 'Recently Added in ${library}';
 
+	/// en: 'Latest Albums in ${library}'
+	String latestAlbumsIn({required Object library}) => 'Latest Albums in ${library}';
+
+	/// en: 'Recently Played in ${library}'
+	String recentlyPlayedIn({required Object library}) => 'Recently Played in ${library}';
+
+	/// en: 'Most Played in ${library}'
+	String mostPlayedIn({required Object library}) => 'Most Played in ${library}';
+
 	/// en: 'S${season}E${episode}'
 	String playEpisode({required Object season, required Object episode}) => 'S${season}E${episode}';
 
@@ -2827,6 +2864,84 @@ class TranslationsPlaylistsEn {
 	String get errorRemoving => 'Failed to remove from playlist';
 }
 
+// Path: music
+class TranslationsMusicEn {
+	TranslationsMusicEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Go to album'
+	String get goToAlbum => 'Go to album';
+
+	/// en: 'Go to artist'
+	String get goToArtist => 'Go to artist';
+
+	/// en: 'Instant Mix'
+	String get instantMix => 'Instant Mix';
+
+	/// en: 'Play next'
+	String get playNext => 'Play next';
+
+	/// en: 'Add to queue'
+	String get addToQueue => 'Add to queue';
+
+	/// en: 'Disc ${n}'
+	String discNumber({required Object n}) => 'Disc ${n}';
+
+	/// en: '(one) {${n} track} (other) {${n} tracks}'
+	String trackCount({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: '${n} track',
+		other: '${n} tracks',
+	);
+
+	/// en: 'Now Playing'
+	String get nowPlaying => 'Now Playing';
+
+	/// en: 'Playing from ${title}'
+	String playingFrom({required Object title}) => 'Playing from ${title}';
+
+	/// en: 'Queue'
+	String get queue => 'Queue';
+
+	/// en: 'Clear queue'
+	String get clearQueue => 'Clear queue';
+
+	/// en: 'Lyrics'
+	String get lyrics => 'Lyrics';
+
+	/// en: 'No lyrics available'
+	String get noLyrics => 'No lyrics available';
+
+	/// en: 'Sleep timer'
+	String get sleepTimer => 'Sleep timer';
+
+	/// en: 'End of track'
+	String get sleepTimerEndOfTrack => 'End of track';
+
+	/// en: '${n} minutes'
+	String sleepTimerMinutes({required Object n}) => '${n} minutes';
+
+	/// en: 'Stop playback'
+	String get stopPlayback => 'Stop playback';
+
+	/// en: 'Previous track'
+	String get previousTrack => 'Previous track';
+
+	/// en: 'Next track'
+	String get nextTrack => 'Next track';
+
+	/// en: 'Repeat'
+	String get repeat => 'Repeat';
+
+	/// en: 'Repeat all'
+	String get repeatAll => 'Repeat all';
+
+	/// en: 'Repeat one'
+	String get repeatOne => 'Repeat one';
+}
+
 // Path: watchTogether
 class TranslationsWatchTogetherEn {
 	TranslationsWatchTogetherEn.internal(this._root);
@@ -3044,6 +3159,12 @@ class TranslationsDownloadsEn {
 
 	/// en: 'Movies'
 	String get movies => 'Movies';
+
+	/// en: 'Music'
+	String get music => 'Music';
+
+	/// en: '${count} tracks queued for download'
+	String tracksQueued({required Object count}) => '${count} tracks queued for download';
 
 	/// en: 'No downloads yet'
 	String get noDownloads => 'No downloads yet';
@@ -3343,6 +3464,9 @@ class TranslationsVideoSettingsEn {
 
 	/// en: 'Normalize Loudness'
 	String get audioNormalization => 'Normalize Loudness';
+
+	/// en: 'Downmix to Stereo'
+	String get audioDownmix => 'Downmix to Stereo';
 }
 
 // Path: performanceOverlay
@@ -4144,6 +4268,15 @@ class TranslationsLibrariesGroupingsEn {
 	/// en: 'Episodes'
 	String get episodes => 'Episodes';
 
+	/// en: 'Artists'
+	String get artists => 'Artists';
+
+	/// en: 'Albums'
+	String get albums => 'Albums';
+
+	/// en: 'Tracks'
+	String get tracks => 'Tracks';
+
 	/// en: 'Folders'
 	String get folders => 'Folders';
 }
@@ -4824,6 +4957,7 @@ extension on Translations {
 			'settings.traktDescription' => 'Sync watch history with Trakt',
 			'settings.trackers' => 'Trackers',
 			'settings.trackersDescription' => 'Sync progress to Trakt, MyAnimeList, AniList, and Simkl',
+			'settings.manageLibrariesDescription' => 'Reorder and hide libraries',
 			'settings.companionRemoteServer' => 'Companion Remote Server',
 			'settings.companionRemoteServerDescription' => 'Allow mobile devices on your network to control this app',
 			'settings.autoPip' => 'Auto Picture-in-Picture',
@@ -4840,6 +4974,14 @@ extension on Translations {
 			'settings.audioPassthrough' => 'Audio Passthrough',
 			'settings.audioPassthroughDescription' => 'Send Dolby/DTS audio to your receiver or TV without re-encoding, preserving surround sound. Turn off if you have no sound.',
 			'settings.audioPassthroughDescriptionAppleTv' => 'Hand Dolby Digital Plus (including Atmos) to the system for bitstream output. DTS and TrueHD still play as multichannel PCM. Brief audio gaps can occur when seeking.',
+			'settings.audioDownmix' => 'Downmix to Stereo',
+			'settings.audioDownmixDescription' => 'Mix surround audio down to two channels for stereo speakers or headphones',
+			'settings.downmixCenterBoost' => 'Center Channel Boost',
+			'settings.downmixCenterBoostValue' => ({required Object db}) => '${db} dB',
+			'settings.downmixCenterBoostLabel' => 'Boost (dB)',
+			'settings.downmixCenterBoostShort' => 'dB',
+			'settings.audioDownmixNormalize' => 'Normalize Volume on Downmix',
+			'settings.audioDownmixNormalizeDescription' => 'Lower the mix to prevent clipping. Turn off to keep the original volume (may distort loud scenes).',
 			'settings.atmosDiagnostics' => 'Atmos Output Test',
 			'settings.atmosDiagnosticsDescription' => 'Diagnose Dolby Atmos output by playing test signals through the system player',
 			'settings.atmosTestHlsAtmos' => 'Apple Atmos stream',
@@ -5082,6 +5224,8 @@ extension on Translations {
 			'messages.errorLoading' => ({required Object error}) => 'Error: ${error}',
 			'messages.fileInfoNotAvailable' => 'File information not available',
 			'messages.errorLoadingFileInfo' => ({required Object error}) => 'Error loading file info: ${error}',
+			_ => null,
+		} ?? switch (path) {
 			'messages.errorLoadingSeries' => 'Error loading series',
 			'messages.musicNotSupported' => 'Music playback is not yet supported',
 			'messages.noDescriptionAvailable' => 'No description available',
@@ -5091,8 +5235,6 @@ extension on Translations {
 			'messages.logsCleared' => 'Logs cleared',
 			'messages.logsCopied' => 'Logs copied to clipboard',
 			'messages.noLogsAvailable' => 'No logs available',
-			_ => null,
-		} ?? switch (path) {
 			'messages.libraryScanning' => ({required Object title}) => 'Scanning "${title}"...',
 			'messages.libraryScanStarted' => ({required Object title}) => 'Library scan started for "${title}"',
 			'messages.libraryScanFailed' => ({required Object error}) => 'Failed to scan library: ${error}',
@@ -5226,6 +5368,9 @@ extension on Translations {
 			'discover.nextUpIn' => ({required Object library}) => 'Next Up in ${library}',
 			'discover.recentlyAdded' => 'Recently Added',
 			'discover.recentlyAddedIn' => ({required Object library}) => 'Recently Added in ${library}',
+			'discover.latestAlbumsIn' => ({required Object library}) => 'Latest Albums in ${library}',
+			'discover.recentlyPlayedIn' => ({required Object library}) => 'Recently Played in ${library}',
+			'discover.mostPlayedIn' => ({required Object library}) => 'Most Played in ${library}',
 			'discover.playEpisode' => ({required Object season, required Object episode}) => 'S${season}E${episode}',
 			'discover.overview' => 'Overview',
 			'discover.cast' => 'Cast',
@@ -5300,6 +5445,9 @@ extension on Translations {
 			'libraries.groupings.shows' => 'TV Shows',
 			'libraries.groupings.seasons' => 'Seasons',
 			'libraries.groupings.episodes' => 'Episodes',
+			'libraries.groupings.artists' => 'Artists',
+			'libraries.groupings.albums' => 'Albums',
+			'libraries.groupings.tracks' => 'Tracks',
 			'libraries.groupings.folders' => 'Folders',
 			'libraries.filterCategories.genre' => 'Genre',
 			'libraries.filterCategories.year' => 'Year',
@@ -5462,6 +5610,28 @@ extension on Translations {
 			'playlists.errorAdding' => 'Failed to add to playlist',
 			'playlists.errorReordering' => 'Failed to reorder playlist item',
 			'playlists.errorRemoving' => 'Failed to remove from playlist',
+			'music.goToAlbum' => 'Go to album',
+			'music.goToArtist' => 'Go to artist',
+			'music.instantMix' => 'Instant Mix',
+			'music.playNext' => 'Play next',
+			'music.addToQueue' => 'Add to queue',
+			'music.discNumber' => ({required Object n}) => 'Disc ${n}',
+			'music.trackCount' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n, one: '${n} track', other: '${n} tracks', ), 
+			'music.nowPlaying' => 'Now Playing',
+			'music.playingFrom' => ({required Object title}) => 'Playing from ${title}',
+			'music.queue' => 'Queue',
+			'music.clearQueue' => 'Clear queue',
+			'music.lyrics' => 'Lyrics',
+			'music.noLyrics' => 'No lyrics available',
+			'music.sleepTimer' => 'Sleep timer',
+			'music.sleepTimerEndOfTrack' => 'End of track',
+			'music.sleepTimerMinutes' => ({required Object n}) => '${n} minutes',
+			'music.stopPlayback' => 'Stop playback',
+			'music.previousTrack' => 'Previous track',
+			'music.nextTrack' => 'Next track',
+			'music.repeat' => 'Repeat',
+			'music.repeatAll' => 'Repeat all',
+			'music.repeatOne' => 'Repeat one',
 			'watchTogether.title' => 'Watch Together',
 			'watchTogether.description' => 'Watch content in sync with friends and family',
 			'watchTogether.createSession' => 'Create Session',
@@ -5529,6 +5699,8 @@ extension on Translations {
 			'downloads.manage' => 'Manage',
 			'downloads.tvShows' => 'TV Shows',
 			'downloads.movies' => 'Movies',
+			'downloads.music' => 'Music',
+			'downloads.tracksQueued' => ({required Object count}) => '${count} tracks queued for download',
 			'downloads.noDownloads' => 'No downloads yet',
 			'downloads.noDownloadsDescription' => 'Downloaded content will appear here for offline viewing',
 			'downloads.downloadNow' => 'Download',
@@ -5566,6 +5738,8 @@ extension on Translations {
 			'downloads.includeSpecials' => 'Include Specials',
 			'downloads.howManyEpisodes' => 'How many episodes?',
 			'downloads.itemsQueued' => ({required Object count}) => '${count} items queued for download',
+			_ => null,
+		} ?? switch (path) {
 			'downloads.keepSynced' => 'Keep synced',
 			'downloads.downloadOnce' => 'Download once',
 			'downloads.keepNUnwatched' => ({required Object count}) => 'Keep ${count} unwatched',
@@ -5605,8 +5779,6 @@ extension on Translations {
 			'shaders.shaderImportFailed' => 'Failed to import shader',
 			'shaders.deleteShader' => 'Delete Shader',
 			'shaders.deleteShaderConfirm' => ({required Object name}) => 'Delete "${name}"?',
-			_ => null,
-		} ?? switch (path) {
 			'companionRemote.title' => 'Companion Remote',
 			'companionRemote.connectedTo' => ({required Object name}) => 'Connected to ${name}',
 			'companionRemote.unknownDevice' => 'Unknown Device',
@@ -5680,6 +5852,7 @@ extension on Translations {
 			'videoSettings.performanceOverlay' => 'Performance Overlay',
 			'videoSettings.audioPassthrough' => 'Audio Passthrough',
 			'videoSettings.audioNormalization' => 'Normalize Loudness',
+			'videoSettings.audioDownmix' => 'Downmix to Stereo',
 			'performanceOverlay.color' => 'Color',
 			'performanceOverlay.performance' => 'Performance',
 			'performanceOverlay.buffer' => 'Buffer',

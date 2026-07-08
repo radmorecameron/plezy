@@ -8,6 +8,7 @@ import '../media/media_item.dart';
 import '../media/media_item_types.dart';
 import '../media/media_server_client.dart';
 import '../media/media_source_info.dart';
+import '../models/audio_quality_preset.dart';
 import '../models/download_models.dart';
 import '../models/transcode_quality_preset.dart';
 import '../mpv/models.dart';
@@ -136,11 +137,7 @@ class PlaybackInitializationService {
       }
 
       appLogger.d('Found offline video: $readablePath');
-      return (
-        path: readablePath,
-        mediaIndex: downloadedItem.mediaIndex,
-        mediaSourceId: downloadedItem.mediaSourceId,
-      );
+      return (path: readablePath, mediaIndex: downloadedItem.mediaIndex, mediaSourceId: downloadedItem.mediaSourceId);
     } catch (e) {
       appLogger.w('Error checking offline video path', error: e);
       return null;
@@ -157,8 +154,10 @@ class PlaybackInitializationService {
     required MediaItem metadata,
     required int selectedMediaIndex,
     String? selectedMediaSourceId,
+    String? preferredVersionSignature,
     bool preferOffline = false,
     TranscodeQualityPreset qualityPreset = TranscodeQualityPreset.original,
+    AudioQualityPreset? audioQualityPreset,
     int? selectedAudioStreamId,
     String? sessionIdentifier,
     String? transcodeSessionId,
@@ -201,7 +200,9 @@ class PlaybackInitializationService {
           metadata: metadata,
           selectedMediaIndex: selectedMediaIndex,
           selectedMediaSourceId: selectedMediaSourceId,
+          preferredVersionSignature: preferredVersionSignature,
           qualityPreset: qualityPreset,
+          audioQualityPreset: audioQualityPreset,
           selectedAudioStreamId: selectedAudioStreamId,
           sessionIdentifier: sessionIdentifier,
           transcodeSessionId: transcodeSessionId,

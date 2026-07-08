@@ -19,11 +19,16 @@ import '../providers/playback_state_provider.dart';
 import '../providers/trakt_account_provider.dart';
 import '../providers/trackers_provider.dart';
 import '../providers/watch_state_store.dart';
+import '../database/app_database.dart';
 import '../screens/main_screen.dart';
 import '../services/api_cache.dart';
+import '../services/music/music_playback_service.dart';
+import '../services/music/music_playback_service_impl.dart';
+import '../services/offline_watch_sync_service.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
 import '../watch_together/providers/watch_together_provider.dart';
+import '../widgets/music/mini_player.dart';
 import 'profile_navigation_scope.dart';
 
 /// Root route for an active profile session.
@@ -165,6 +170,16 @@ class _ProfileSessionScreenState extends State<ProfileSessionScreen> {
                 },
               ),
               ChangeNotifierProvider(create: (context) => PlaybackStateProvider()),
+              // Profile-session scope so a profile switch tears the music
+              // session down (dispose stops playback + releases the audio
+              // core).
+              ChangeNotifierProvider<MusicPlaybackService>(
+                create: (context) => MusicPlaybackServiceImpl(
+                  serverManager: context.read<MultiServerProvider>().serverManager,
+                  database: context.read<AppDatabase>(),
+                  offlineWatchService: context.read<OfflineWatchSyncService>(),
+                ),
+              ),
               ChangeNotifierProvider(create: (context) => WatchTogetherProvider()),
               ChangeNotifierProvider(
                 create: (context) {
@@ -214,6 +229,12 @@ class _ProfileSessionNavigatorState extends State<_ProfileSessionNavigator> {
   final _mainScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final _routeObserver = RouteObserver<PageRoute<dynamic>>();
 
+  // Music mini-player wiring: the route observer hides the overlay while the
+  // video player / now-playing screen is up; the inset controller lets
+  // MainScreen report its bottom-bar height so the overlay floats above it.
+  final _musicRouteObserver = MusicUiRouteObserver();
+  final _miniPlayerInsets = MiniPlayerInsetController();
+
   @override
   void initState() {
     super.initState();
@@ -225,6 +246,8 @@ class _ProfileSessionNavigatorState extends State<_ProfileSessionNavigator> {
   void dispose() {
     profileNavigationRegistry.detachNavigator(_navigatorKey);
     profileNavigationRegistry.detachMainScaffoldMessenger(_mainScaffoldMessengerKey);
+    _miniPlayerInsets.dispose();
+    _musicRouteObserver.suppress.dispose();
     super.dispose();
   }
 
@@ -240,10 +263,24 @@ class _ProfileSessionNavigatorState extends State<_ProfileSessionNavigator> {
           if (didPop) return;
           unawaited(_navigatorKey.currentState?.maybePop());
         },
-        child: Navigator(
-          key: _navigatorKey,
-          observers: [_routeObserver, BackKeySuppressorObserver()],
-          onGenerateRoute: _onGenerateRoute,
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider<MiniPlayerInsetController>.value(value: _miniPlayerInsets),
+            Provider<MusicUiRouteObserver>.value(value: _musicRouteObserver),
+          ],
+          // The mini-player mounts ABOVE the nested navigator so it persists
+          // across content routes (but inside the profile provider scope so
+          // it dies with the session).
+          child: Stack(
+            children: [
+              Navigator(
+                key: _navigatorKey,
+                observers: [_routeObserver, _musicRouteObserver, BackKeySuppressorObserver()],
+                onGenerateRoute: _onGenerateRoute,
+              ),
+              const Positioned.fill(child: MusicMiniPlayerOverlay()),
+            ],
+          ),
         ),
       ),
     );

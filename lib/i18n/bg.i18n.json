@@ -265,6 +265,14 @@
     "audioPassthrough": "Аудио passthrough",
     "audioPassthroughDescription": "Изпращай Dolby/DTS звук към ресийвъра или телевизора без прекодиране, запазвайки съраунд звука. Изключете, ако няма звук.",
     "audioPassthroughDescriptionAppleTv": "Предава Dolby Digital Plus (вкл. Atmos) на системата като битов поток. DTS и TrueHD продължават да се възпроизвеждат като многоканален PCM. При превъртане може да има кратки прекъсвания на звука.",
+    "audioDownmix": "Смесване до стерео",
+    "audioDownmixDescription": "Смесва съраунд звука до два канала за стерео тонколони или слушалки",
+    "downmixCenterBoost": "Усилване на централния канал",
+    "downmixCenterBoostValue": "${db} дБ",
+    "downmixCenterBoostLabel": "Усилване (дБ)",
+    "downmixCenterBoostShort": "дБ",
+    "audioDownmixNormalize": "Нормализиране на звука при смесване",
+    "audioDownmixNormalizeDescription": "Понижава микса, за да се предотврати клипинг. Изключете, за да запазите оригиналната сила на звука (възможни изкривявания при силни сцени).",
     "atmosDiagnostics": "Тест на Atmos изхода",
     "atmosDiagnosticsDescription": "Диагностика на Dolby Atmos изхода чрез възпроизвеждане на тестови сигнали през системния плейър",
     "atmosTestHlsAtmos": "Apple Atmos поток",
@@ -683,6 +691,9 @@
     "nextUpIn": "Следва в ${library}",
     "recentlyAdded": "Наскоро добавени",
     "recentlyAddedIn": "Наскоро добавени в ${library}",
+    "latestAlbumsIn": "Последни албуми в ${library}",
+    "recentlyPlayedIn": "Наскоро възпроизведени в ${library}",
+    "mostPlayedIn": "Най-възпроизвеждани в ${library}",
     "playEpisode": "S${season}E${episode}",
     "overview": "Обзор",
     "cast": "Актьори",
@@ -762,6 +773,9 @@
       "shows": "ТВ сериали",
       "seasons": "Сезони",
       "episodes": "Епизоди",
+      "artists": "Изпълнители",
+      "albums": "Албуми",
+      "tracks": "Песни",
       "folders": "Папки"
     },
     "filterCategories": {
@@ -947,6 +961,33 @@
     "errorReordering": "Неуспешно пренареждане на елемент в плейлиста",
     "errorRemoving": "Неуспешно премахване от плейлист"
   },
+  "music": {
+    "goToAlbum": "Към албума",
+    "goToArtist": "Към изпълнителя",
+    "instantMix": "Мигновен микс",
+    "playNext": "Пусни следващото",
+    "addToQueue": "Добави към опашката",
+    "discNumber": "Диск ${n}",
+    "trackCount": {
+      "one": "${n} песен",
+      "other": "${n} песни"
+    },
+    "nowPlaying": "Сега се възпроизвежда",
+    "playingFrom": "Възпроизвеждане от ${title}",
+    "queue": "Опашка",
+    "clearQueue": "Изчисти опашката",
+    "lyrics": "Текст",
+    "noLyrics": "Няма наличен текст",
+    "sleepTimer": "Таймер за заспиване",
+    "sleepTimerEndOfTrack": "Край на песента",
+    "sleepTimerMinutes": "${n} минути",
+    "stopPlayback": "Спри възпроизвеждането",
+    "previousTrack": "Предишна песен",
+    "nextTrack": "Следваща песен",
+    "repeat": "Повтори",
+    "repeatAll": "Повтори всички",
+    "repeatOne": "Повтори една"
+  },
   "watchTogether": {
     "title": "Гледане заедно",
     "description": "Гледайте съдържание синхронизирано с приятели и семейство",
@@ -1014,6 +1055,8 @@
     "manage": "Управление",
     "tvShows": "ТВ сериали",
     "movies": "Филми",
+    "music": "Музика",
+    "tracksQueued": "${count} песни в опашката за изтегляне",
     "noDownloads": "Все още няма изтегляния",
     "noDownloadsDescription": "Изтегленото съдържание ще се показва тук за офлайн гледане",
     "downloadNow": "Изтегли",
@@ -1176,7 +1219,8 @@
     "audioOutput": "Аудио изход",
     "performanceOverlay": "Оверлей за производителност",
     "audioPassthrough": "Аудио passthrough",
-    "audioNormalization": "Нормализиране на силата на звука"
+    "audioNormalization": "Нормализиране на силата на звука",
+    "audioDownmix": "Смесване до стерео"
   },
   "performanceOverlay": {
     "color": "Цвят",

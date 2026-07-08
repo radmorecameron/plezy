@@ -265,6 +265,14 @@
     "audioPassthrough": "Lyd-passthrough",
     "audioPassthroughDescription": "Send Dolby/DTS-lyd til din receiver eller dit TV uden genkodning, så surroundlyd bevares. Slå fra, hvis du ikke har lyd.",
     "audioPassthroughDescriptionAppleTv": "Overlad Dolby Digital Plus (inkl. Atmos) til systemet som bitstream. DTS og TrueHD afspilles stadig som flerkanals PCM. Korte lydhuller kan forekomme ved søgning.",
+    "audioDownmix": "Downmix til stereo",
+    "audioDownmixDescription": "Mikser surroundlyd ned til to kanaler til stereohøjttalere eller hovedtelefoner",
+    "downmixCenterBoost": "Forstærkning af centerkanal",
+    "downmixCenterBoostValue": "${db} dB",
+    "downmixCenterBoostLabel": "Forstærkning (dB)",
+    "downmixCenterBoostShort": "dB",
+    "audioDownmixNormalize": "Normalisér lydstyrke ved downmix",
+    "audioDownmixNormalizeDescription": "Sænker mixet for at undgå clipping. Slå fra for at bevare den oprindelige lydstyrke (høje scener kan forvrænges).",
     "atmosDiagnostics": "Atmos-outputtest",
     "atmosDiagnosticsDescription": "Diagnosticér Dolby Atmos-output ved at afspille testsignaler gennem systemafspilleren",
     "atmosTestHlsAtmos": "Apple Atmos-stream",
@@ -683,6 +691,9 @@
     "nextUpIn": "Næste op i ${library}",
     "recentlyAdded": "Nyligt tilføjet",
     "recentlyAddedIn": "Nyligt tilføjet i ${library}",
+    "latestAlbumsIn": "Nyeste album i ${library}",
+    "recentlyPlayedIn": "Senest afspillet i ${library}",
+    "mostPlayedIn": "Mest afspillet i ${library}",
     "playEpisode": "S${season}E${episode}",
     "overview": "Oversigt",
     "cast": "Rollebesætning",
@@ -762,6 +773,9 @@
       "shows": "TV-serier",
       "seasons": "Sæsoner",
       "episodes": "Episoder",
+      "artists": "Kunstnere",
+      "albums": "Album",
+      "tracks": "Numre",
       "folders": "Mapper"
     },
     "filterCategories": {
@@ -947,6 +961,33 @@
     "errorReordering": "Kunne ikke ændre rækkefølge på playlisteelement",
     "errorRemoving": "Kunne ikke fjerne fra playliste"
   },
+  "music": {
+    "goToAlbum": "Gå til album",
+    "goToArtist": "Gå til kunstner",
+    "instantMix": "Direkte miks",
+    "playNext": "Afspil næste",
+    "addToQueue": "Føj til kø",
+    "discNumber": "Disk ${n}",
+    "trackCount": {
+      "one": "${n} nummer",
+      "other": "${n} numre"
+    },
+    "nowPlaying": "Afspiller nu",
+    "playingFrom": "Afspiller fra ${title}",
+    "queue": "Kø",
+    "clearQueue": "Ryd kø",
+    "lyrics": "Sangtekst",
+    "noLyrics": "Ingen sangtekst tilgængelig",
+    "sleepTimer": "Sovetimer",
+    "sleepTimerEndOfTrack": "Slutningen af nummeret",
+    "sleepTimerMinutes": "${n} minutter",
+    "stopPlayback": "Stop afspilning",
+    "previousTrack": "Forrige nummer",
+    "nextTrack": "Næste nummer",
+    "repeat": "Gentag",
+    "repeatAll": "Gentag alle",
+    "repeatOne": "Gentag ét nummer"
+  },
   "watchTogether": {
     "title": "Se sammen",
     "description": "Se indhold synkroniseret med venner og familie",
@@ -1014,6 +1055,8 @@
     "manage": "Administrer",
     "tvShows": "TV-serier",
     "movies": "Film",
+    "music": "Musik",
+    "tracksQueued": "${count} numre i kø til download",
     "noDownloads": "Ingen downloads endnu",
     "noDownloadsDescription": "Downloadet indhold vises her til offlinevisning",
     "downloadNow": "Download",
@@ -1176,7 +1219,8 @@
     "audioOutput": "Lydoutput",
     "performanceOverlay": "Ydelsesoverlay",
     "audioPassthrough": "Lyd-passthrough",
-    "audioNormalization": "Normalisér lydstyrke"
+    "audioNormalization": "Normalisér lydstyrke",
+    "audioDownmix": "Downmix til stereo"
   },
   "performanceOverlay": {
     "color": "Farve",

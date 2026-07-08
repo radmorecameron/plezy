@@ -72,6 +72,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsLiveTvZh liveTv = _TranslationsLiveTvZh._(_root);
 	@override late final _TranslationsCollectionsZh collections = _TranslationsCollectionsZh._(_root);
 	@override late final _TranslationsPlaylistsZh playlists = _TranslationsPlaylistsZh._(_root);
+	@override late final _TranslationsMusicZh music = _TranslationsMusicZh._(_root);
 	@override late final _TranslationsWatchTogetherZh watchTogether = _TranslationsWatchTogetherZh._(_root);
 	@override late final _TranslationsDownloadsZh downloads = _TranslationsDownloadsZh._(_root);
 	@override late final _TranslationsShadersZh shaders = _TranslationsShadersZh._(_root);
@@ -394,6 +395,14 @@ class _TranslationsSettingsZh extends TranslationsSettingsEn {
 	@override String get audioPassthrough => '音频直通';
 	@override String get audioPassthroughDescription => '将 Dolby/DTS 音频不经重新编码直接发送到功放或电视，保留环绕声。如果没有声音，请关闭。';
 	@override String get audioPassthroughDescriptionAppleTv => '将 Dolby Digital Plus（含 Atmos）以比特流方式交给系统输出。DTS 和 TrueHD 仍以多声道 PCM 播放。快进快退时可能出现短暂声音中断。';
+	@override String get audioDownmix => '下混为立体声';
+	@override String get audioDownmixDescription => '将环绕声混合为双声道，适用于立体声音箱或耳机';
+	@override String get downmixCenterBoost => '中置声道增强';
+	@override String downmixCenterBoostValue({required Object db}) => '${db} dB';
+	@override String get downmixCenterBoostLabel => '增强 (dB)';
+	@override String get downmixCenterBoostShort => 'dB';
+	@override String get audioDownmixNormalize => '下混时音量标准化';
+	@override String get audioDownmixNormalizeDescription => '降低混音电平以防止削波。关闭可保持原始音量（大音量场景可能失真）。';
 	@override String get atmosDiagnostics => 'Atmos 输出测试';
 	@override String get atmosDiagnosticsDescription => '通过系统播放器播放测试信号，诊断 Dolby Atmos 输出';
 	@override String get atmosTestHlsAtmos => 'Apple Atmos 流';
@@ -890,6 +899,9 @@ class _TranslationsDiscoverZh extends TranslationsDiscoverEn {
 	@override String nextUpIn({required Object library}) => '${library} 中接下来';
 	@override String get recentlyAdded => '最近添加';
 	@override String recentlyAddedIn({required Object library}) => '${library} 中最近添加';
+	@override String latestAlbumsIn({required Object library}) => '${library} 中的最新专辑';
+	@override String recentlyPlayedIn({required Object library}) => '${library} 中最近播放';
+	@override String mostPlayedIn({required Object library}) => '${library} 中最常播放';
 	@override String playEpisode({required Object season, required Object episode}) => 'S${season}E${episode}';
 	@override String get overview => '概述';
 	@override String get cast => '演员表';
@@ -1191,6 +1203,39 @@ class _TranslationsPlaylistsZh extends TranslationsPlaylistsEn {
 	@override String get errorRemoving => '从播放列表中移除失败';
 }
 
+// Path: music
+class _TranslationsMusicZh extends TranslationsMusicEn {
+	_TranslationsMusicZh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get goToAlbum => '前往专辑';
+	@override String get goToArtist => '前往艺术家';
+	@override String get instantMix => '即时混音';
+	@override String get playNext => '下一首播放';
+	@override String get addToQueue => '添加到队列';
+	@override String discNumber({required Object n}) => '碟片 ${n}';
+	@override String trackCount({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('zh'))(n,
+		other: '${n} 首',
+	);
+	@override String get nowPlaying => '正在播放';
+	@override String playingFrom({required Object title}) => '来自 ${title}';
+	@override String get queue => '播放队列';
+	@override String get clearQueue => '清空队列';
+	@override String get lyrics => '歌词';
+	@override String get noLyrics => '暂无歌词';
+	@override String get sleepTimer => '睡眠定时器';
+	@override String get sleepTimerEndOfTrack => '曲目结束时';
+	@override String sleepTimerMinutes({required Object n}) => '${n} 分钟';
+	@override String get stopPlayback => '停止播放';
+	@override String get previousTrack => '上一首';
+	@override String get nextTrack => '下一首';
+	@override String get repeat => '循环';
+	@override String get repeatAll => '列表循环';
+	@override String get repeatOne => '单曲循环';
+}
+
 // Path: watchTogether
 class _TranslationsWatchTogetherZh extends TranslationsWatchTogetherEn {
 	_TranslationsWatchTogetherZh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -1271,6 +1316,8 @@ class _TranslationsDownloadsZh extends TranslationsDownloadsEn {
 	@override String get manage => '管理';
 	@override String get tvShows => '电视剧';
 	@override String get movies => '电影';
+	@override String get music => '音乐';
+	@override String tracksQueued({required Object count}) => '${count} 首曲目已加入下载队列';
 	@override String get noDownloads => '暂无下载';
 	@override String get noDownloadsDescription => '下载的内容将在此处显示以供离线观看';
 	@override String get downloadNow => '下载';
@@ -1391,6 +1438,7 @@ class _TranslationsVideoSettingsZh extends TranslationsVideoSettingsEn {
 	@override String get performanceOverlay => '性能监控';
 	@override String get audioPassthrough => '音频直通';
 	@override String get audioNormalization => '响度标准化';
+	@override String get audioDownmix => '下混为立体声';
 }
 
 // Path: performanceOverlay
@@ -1732,6 +1780,9 @@ class _TranslationsLibrariesGroupingsZh extends TranslationsLibrariesGroupingsEn
 	@override String get shows => '剧集';
 	@override String get seasons => '季';
 	@override String get episodes => '集';
+	@override String get artists => '艺术家';
+	@override String get albums => '专辑';
+	@override String get tracks => '曲目';
 	@override String get folders => '文件夹';
 }
 
@@ -2198,6 +2249,14 @@ extension on TranslationsZh {
 			'settings.audioPassthrough' => '音频直通',
 			'settings.audioPassthroughDescription' => '将 Dolby/DTS 音频不经重新编码直接发送到功放或电视，保留环绕声。如果没有声音，请关闭。',
 			'settings.audioPassthroughDescriptionAppleTv' => '将 Dolby Digital Plus（含 Atmos）以比特流方式交给系统输出。DTS 和 TrueHD 仍以多声道 PCM 播放。快进快退时可能出现短暂声音中断。',
+			'settings.audioDownmix' => '下混为立体声',
+			'settings.audioDownmixDescription' => '将环绕声混合为双声道，适用于立体声音箱或耳机',
+			'settings.downmixCenterBoost' => '中置声道增强',
+			'settings.downmixCenterBoostValue' => ({required Object db}) => '${db} dB',
+			'settings.downmixCenterBoostLabel' => '增强 (dB)',
+			'settings.downmixCenterBoostShort' => 'dB',
+			'settings.audioDownmixNormalize' => '下混时音量标准化',
+			'settings.audioDownmixNormalizeDescription' => '降低混音电平以防止削波。关闭可保持原始音量（大音量场景可能失真）。',
 			'settings.atmosDiagnostics' => 'Atmos 输出测试',
 			'settings.atmosDiagnosticsDescription' => '通过系统播放器播放测试信号，诊断 Dolby Atmos 输出',
 			'settings.atmosTestHlsAtmos' => 'Apple Atmos 流',
@@ -2447,6 +2506,8 @@ extension on TranslationsZh {
 			'messages.logsCleared' => '日志已清除',
 			'messages.logsCopied' => '日志已复制到剪贴板',
 			'messages.noLogsAvailable' => '没有可用日志',
+			_ => null,
+		} ?? switch (path) {
 			'messages.libraryScanning' => ({required Object title}) => '正在扫描 “${title}”...',
 			'messages.libraryScanStarted' => ({required Object title}) => '已开始扫描 “${title}” 媒体库',
 			'messages.libraryScanFailed' => ({required Object error}) => '无法扫描媒体库: ${error}',
@@ -2455,8 +2516,6 @@ extension on TranslationsZh {
 			'messages.metadataRefreshFailed' => ({required Object error}) => '无法刷新元数据: ${error}',
 			'messages.logoutConfirm' => '你确定要登出吗？',
 			'messages.noSeasonsFound' => '未找到季',
-			_ => null,
-		} ?? switch (path) {
 			'messages.seasonsLoadFailed' => '无法加载季',
 			'messages.noEpisodesFound' => '在第一季中未找到剧集',
 			'messages.noEpisodesFoundGeneral' => '未找到剧集',
@@ -2582,6 +2641,9 @@ extension on TranslationsZh {
 			'discover.nextUpIn' => ({required Object library}) => '${library} 中接下来',
 			'discover.recentlyAdded' => '最近添加',
 			'discover.recentlyAddedIn' => ({required Object library}) => '${library} 中最近添加',
+			'discover.latestAlbumsIn' => ({required Object library}) => '${library} 中的最新专辑',
+			'discover.recentlyPlayedIn' => ({required Object library}) => '${library} 中最近播放',
+			'discover.mostPlayedIn' => ({required Object library}) => '${library} 中最常播放',
 			'discover.playEpisode' => ({required Object season, required Object episode}) => 'S${season}E${episode}',
 			'discover.overview' => '概述',
 			'discover.cast' => '演员表',
@@ -2654,6 +2716,9 @@ extension on TranslationsZh {
 			'libraries.groupings.shows' => '剧集',
 			'libraries.groupings.seasons' => '季',
 			'libraries.groupings.episodes' => '集',
+			'libraries.groupings.artists' => '艺术家',
+			'libraries.groupings.albums' => '专辑',
+			'libraries.groupings.tracks' => '曲目',
 			'libraries.groupings.folders' => '文件夹',
 			'libraries.filterCategories.genre' => '类型',
 			'libraries.filterCategories.year' => '年份',
@@ -2815,6 +2880,28 @@ extension on TranslationsZh {
 			'playlists.errorAdding' => '添加到播放列表失败',
 			'playlists.errorReordering' => '重新排序播放列表项目失败',
 			'playlists.errorRemoving' => '从播放列表中移除失败',
+			'music.goToAlbum' => '前往专辑',
+			'music.goToArtist' => '前往艺术家',
+			'music.instantMix' => '即时混音',
+			'music.playNext' => '下一首播放',
+			'music.addToQueue' => '添加到队列',
+			'music.discNumber' => ({required Object n}) => '碟片 ${n}',
+			'music.trackCount' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('zh'))(n, other: '${n} 首', ), 
+			'music.nowPlaying' => '正在播放',
+			'music.playingFrom' => ({required Object title}) => '来自 ${title}',
+			'music.queue' => '播放队列',
+			'music.clearQueue' => '清空队列',
+			'music.lyrics' => '歌词',
+			'music.noLyrics' => '暂无歌词',
+			'music.sleepTimer' => '睡眠定时器',
+			'music.sleepTimerEndOfTrack' => '曲目结束时',
+			'music.sleepTimerMinutes' => ({required Object n}) => '${n} 分钟',
+			'music.stopPlayback' => '停止播放',
+			'music.previousTrack' => '上一首',
+			'music.nextTrack' => '下一首',
+			'music.repeat' => '循环',
+			'music.repeatAll' => '列表循环',
+			'music.repeatOne' => '单曲循环',
 			'watchTogether.title' => '一起看',
 			'watchTogether.description' => '与朋友和家人同步观看内容',
 			'watchTogether.createSession' => '创建会话',
@@ -2879,6 +2966,8 @@ extension on TranslationsZh {
 			'downloads.manage' => '管理',
 			'downloads.tvShows' => '电视剧',
 			'downloads.movies' => '电影',
+			'downloads.music' => '音乐',
+			'downloads.tracksQueued' => ({required Object count}) => '${count} 首曲目已加入下载队列',
 			'downloads.noDownloads' => '暂无下载',
 			'downloads.noDownloadsDescription' => '下载的内容将在此处显示以供离线观看',
 			'downloads.downloadNow' => '下载',
@@ -2931,6 +3020,8 @@ extension on TranslationsZh {
 			'downloads.manageSyncRule' => '管理同步',
 			'downloads.editEpisodeCount' => '剧集数量',
 			'downloads.editSyncFilter' => '同步筛选',
+			_ => null,
+		} ?? switch (path) {
 			'downloads.syncAllItems' => '同步所有项目',
 			'downloads.syncUnwatchedItems' => '同步未观看项目',
 			'downloads.syncRuleServerContext' => ({required Object server, required Object status}) => '服务器: ${server} • ${status}',
@@ -2969,8 +3060,6 @@ extension on TranslationsZh {
 			'companionRemote.session.usePhoneToControl' => '使用移动设备控制此应用',
 			'companionRemote.session.startServer' => '启动服务器',
 			'companionRemote.session.stopServer' => '停止服务器',
-			_ => null,
-		} ?? switch (path) {
 			'companionRemote.session.minimize' => '最小化',
 			'companionRemote.pairing.discoveryDescription' => '使用同一 Plex 账号的 Plezy 设备会显示在这里',
 			'companionRemote.pairing.hostAddressHint' => '192.168.1.100:48632',
@@ -3030,6 +3119,7 @@ extension on TranslationsZh {
 			'videoSettings.performanceOverlay' => '性能监控',
 			'videoSettings.audioPassthrough' => '音频直通',
 			'videoSettings.audioNormalization' => '响度标准化',
+			'videoSettings.audioDownmix' => '下混为立体声',
 			'performanceOverlay.color' => '颜色',
 			'performanceOverlay.performance' => '性能',
 			'performanceOverlay.buffer' => '缓冲',
