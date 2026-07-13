@@ -3,6 +3,7 @@
   Plezy
 </h1>
 
+
 A modern client for Plex and Jellyfin on desktop, mobile, and TV. Built with Flutter for native performance and a clean interface.
 
 <p>
