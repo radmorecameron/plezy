@@ -5,19 +5,19 @@ on:
     inputs:
       build_android:
         description: Build Android
-        default: true
+        default: false
         type: boolean
       build_ios:
         description: Build iOS
-        default: true
+        default: false
         type: boolean
       build_macos:
         description: Build macOS
-        default: true
+        default: false
         type: boolean
       build_windows:
         description: Build Windows
-        default: true
+        default: false
         type: boolean
       build_linux:
         description: Build Linux
